@@ -1,0 +1,20 @@
+.TablePagination {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    justify-content: flex-end;
+
+    button {
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .nav-icon {
+            width: 1em;
+        }
+    }
+}
