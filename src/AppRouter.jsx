@@ -15,7 +15,7 @@ export default function AppRouter() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/courses" element={<Citas />} />
+      <Route path="/dates" element={<Citas />} />
       <Route path="/about" element={<About />} />
       <Route path="/admin" element={<Admin />} />
       <Route path="profile" element={<UserProfile />} />
