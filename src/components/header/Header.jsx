@@ -2,12 +2,13 @@ import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import "./Header.scss";
 import { useSelector } from "react-redux";
-import {updateAuthStoreStateLogOut } from "../../features/authentication/updateAuthState";
+import { updateAuthStoreStateLogOut } from "../../features/authentication/updateAuthState";
 import {
   MdPersonOutline,
   MdOutlineLogout,
   MdOutlineLogin,
 } from "react-icons/md";
+import { FaUserCircle } from "react-icons/fa";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -35,28 +36,36 @@ export default function Header() {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-              <NavLink className="nav-link" to="/dates">Citas</NavLink>
-              <NavLink className="nav-link" to="/about">Acerca de</NavLink>
-              {isAdmin && <NavLink className="nav-link" to="/admin">Admin</NavLink>}
+              <NavLink className="nav-link" to="/dates">
+                Citas
+              </NavLink>
+              <NavLink className="nav-link" to="/about">
+                Acerca de
+              </NavLink>
+              {isAdmin && (
+                <NavLink className="nav-link" to="/admin">
+                  Admin
+                </NavLink>
+              )}
             </Nav>
             {!isLoggedIn && (
               <Nav>
                 <NavLink className="nav-link" to="/login">
                   <MdOutlineLogin /> Iniciar sesion
                 </NavLink>
-                <NavLink className="nav-link" to="/register">Registrarse</NavLink>
+                <NavLink className="nav-link" to="/register">
+                  Registrarse
+                </NavLink>
               </Nav>
             )}
             {isLoggedIn && (
               <Nav>
                 <NavDropdown title={name} id="collasible-nav-dropdown">
-                  <NavDropdown.Item  href="/profile">
+                  <NavDropdown.Item href="/profile">
                     <MdPersonOutline /> Perfil
                   </NavDropdown.Item>
-                  <NavDropdown.Item>
-                    <a onClick={handleLogout}>
-                      <MdOutlineLogout /> Cerrar sesión
-                    </a>
+                  <NavDropdown.Item onClick={handleLogout}>
+                    <MdOutlineLogout /> Cerrar sesión
                   </NavDropdown.Item>
                 </NavDropdown>
               </Nav>
