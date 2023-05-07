@@ -35,13 +35,19 @@ export default function Login() {
       email: formValues.email,
       password: formValues.password,
     };
-    login(credentials);
-    // if (
-    //   validator.isEmail(credentials.email) &&
-    //   validator.isByteLength(credentials.password, { min: 8, max: undefined })  // TODO agregar mensaje en caso de que no ponga bien los datos
-    // ) {
-    //   login(credentials);
-    // }
+    // login(credentials);
+    if (
+      validator.isEmail(credentials.email) &&
+      validator.isByteLength(credentials.password, { min: 8, max: undefined })
+    ) {
+      login(credentials);
+    } else if (!validator.isEmail(credentials.email)) {
+      setLoginError("Debes introducir un correo real");
+    } else if (
+      !validator.isByteLength(credentials.password, { min: 8, max: undefined })
+    ) {
+      setLoginError("La contraseña debe contener mínimo 8 caracteres");
+    }
   };
 
   const handleChange = (e) => {
