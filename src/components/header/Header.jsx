@@ -8,7 +8,6 @@ import {
   MdOutlineLogout,
   MdOutlineLogin,
 } from "react-icons/md";
-import { FaUserCircle } from "react-icons/fa";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";

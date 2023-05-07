@@ -128,7 +128,7 @@ export default function Admin() {
   return (
     <>
       {isAdmin && (
-        <>
+        <div className="container">
           <h1>Admin</h1>
           <DataListTable
             data={newDoctors(doctors)}
@@ -173,7 +173,7 @@ export default function Admin() {
             }}
             onChange={handleUsersList}
           />
-        </>
+        </div>
       )}
     </>
   );
