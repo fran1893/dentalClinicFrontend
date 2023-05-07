@@ -4,11 +4,12 @@ import { updateAuthStoreStateLogIn } from "../../features/authentication/updateA
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import validator from "validator";
+import "./Login.scss"
 
 export default function Login() {
   const initialFormValues = {
     email: "pancho@gmail.com",
-    password: "admin",
+    password: "12345678",
   };
 
   // HOOKS
@@ -74,33 +75,37 @@ export default function Login() {
 
   // RETURN
   return (
-    <div>
-      <h1>Login</h1>
-      {/* <pre style={{ textAlign: "left", width: "250px", margin: "auto" }}>
+    <div className="container">
+      <div className="abs-center">
+        {/* <pre style={{ textAlign: "left", width: "250px", margin: "auto" }}>
         {JSON.stringify(formValues, null, 2)}
       </pre> */}
-      <form noValidate onSubmit={handleSubmit}>
-        <label htmlFor="">Email</label> <br />
-        <input
-          type="email"
-          name="email"
-          value={formValues.email}
-          onChange={handleChange}
-        />
+        <form noValidate onSubmit={handleSubmit} className="form">
+          <h1>Inicia Sesión</h1>
+          <div className="form-group">
+            <label htmlFor="">Email</label> <br />
+            <input
+              type="email"
+              name="email"
+              value={formValues.email}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="">Password</label> <br />
+            <input
+              type="password"
+              name="password"
+              value={formValues.password}
+              onChange={handleChange}
+            />
+          </div>
+          <br />
+          <button className="btn btn-primary">Iniciar Sesión</button>
+        </form>
         <br />
-        <label htmlFor="">Password</label> <br />
-        <input
-          type="password"
-          name="password"
-          value={formValues.password}
-          onChange={handleChange}
-        />
-        <br />
-        <br />
-        <button>Send</button>
-      </form>
-      <br />
-      {loginError && <p style={{ color: "red" }}>{loginError}</p>}
+        {loginError && <p style={{ color: "red" }}>{loginError}</p>}
+      </div>
     </div>
   );
 }
