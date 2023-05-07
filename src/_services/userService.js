@@ -36,4 +36,15 @@ userService.getAllDoctors = async (token, page = 1) => {
     .data;
 };
 
+userService.getProfile = async (token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  return (await axios.get(global.BASE_URL + `/users/profile`, config))
+    .data;
+};
+
 export default userService;
