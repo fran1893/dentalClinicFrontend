@@ -1,0 +1,21 @@
+#root {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+  }
+
+$white: #ffffff;
+
+$theme-colors: (
+    "light":      #eec6d6,
+    "dark":       #363367,
+    "primary":    #5077b7,
+    "secondary":  #98adc5,
+    "info":       #b3dff3,
+    "success":    #3fc77b,
+    "warning":    #edd435,
+    "danger":     #fa312c,
+);
+
+@import 'bootstrap/scss/bootstrap.scss';

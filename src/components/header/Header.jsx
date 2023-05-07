@@ -2,88 +2,68 @@ import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import "./Header.scss";
 import { useSelector } from "react-redux";
-import { updateAuthStoreStateLogOut } from "../../features/authentication/updateAuthState";
+import {updateAuthStoreStateLogOut } from "../../features/authentication/updateAuthState";
 import {
   MdPersonOutline,
   MdOutlineLogout,
-  MdKeyboardArrowDown,
   MdOutlineLogin,
 } from "react-icons/md";
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown";
 
 export default function Header() {
-  // HOOKS
+  // hooks
   const navigate = useNavigate();
   const authState = useSelector((state) => state.auth);
   const isLoggedIn = authState.isLoggedIn;
   const { name, role } = authState.userInfo;
   const isAdmin = role == "admin";
 
-  // HANDLERS
+  // handlers
   const handleLogout = () => {
     updateAuthStoreStateLogOut();
     navigate("/");
   };
 
-  // RETURN
   return (
     <div className="Header">
-      <nav className="navbar">
-        <ul className="navbar-nav">
-          <li className="nav-item">
-            <NavLink to="/">Home</NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink to="/dates">Citas</NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink to="/about">Acerca de</NavLink>
-          </li>
-          {isAdmin && (
-            <>
-              <li className="nav-item">
-                <NavLink to="/admin">Admin</NavLink>
-              </li>
-            </>
-          )}
-        </ul>
-
-        <ul className="navbar-nav">
-          {!isLoggedIn && (
-            <>
-              <li className="nav-item">
-                <NavLink to="/login">
-                  <MdOutlineLogin />
-                  Login
+      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+        <Container>
+          <Navbar.Brand href="/">Home</Navbar.Brand>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="me-auto">
+              <NavLink className="nav-link" to="/dates">Citas</NavLink>
+              <NavLink className="nav-link" to="/about">Acerca de</NavLink>
+              {isAdmin && <NavLink className="nav-link" to="/admin">Admin</NavLink>}
+            </Nav>
+            {!isLoggedIn && (
+              <Nav>
+                <NavLink className="nav-link" to="/login">
+                  <MdOutlineLogin /> Iniciar sesion
                 </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink to="/register">Registrarse</NavLink>
-              </li>
-            </>
-          )}
-          {isLoggedIn && (
-            <>
-              <li className="nav-item dropdown ">
-                <a>
-                  <MdPersonOutline className="icon" />
-                  {name} <MdKeyboardArrowDown />
-                </a>
-
-                <ul className="dropdown-menu">
-                  <li className="dropdown-item">
-                    <NavLink to="/profile">Perfil</NavLink>
-                  </li>
-                  <li className="dropdown-item">
+                <NavLink className="nav-link" to="/register">Registrarse</NavLink>
+              </Nav>
+            )}
+            {isLoggedIn && (
+              <Nav>
+                <NavDropdown title={name} id="collasible-nav-dropdown">
+                  <NavDropdown.Item  href="/profile">
+                    <MdPersonOutline /> Perfil
+                  </NavDropdown.Item>
+                  <NavDropdown.Item>
                     <a onClick={handleLogout}>
                       <MdOutlineLogout /> Cerrar sesión
                     </a>
-                  </li>
-                </ul>
-              </li>
-            </>
-          )}
-        </ul>
-      </nav>
+                  </NavDropdown.Item>
+                </NavDropdown>
+              </Nav>
+            )}
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
     </div>
   );
 }
