@@ -35,9 +35,11 @@ export default function Header() {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-              <NavLink className="nav-link" to="/dates">
-                Citas
-              </NavLink>
+              {!isAdmin && isLoggedIn && (
+                <NavLink className="nav-link" to="/dates">
+                  Citas
+                </NavLink>
+              )}
               <NavLink className="nav-link" to="/about">
                 Acerca de
               </NavLink>
