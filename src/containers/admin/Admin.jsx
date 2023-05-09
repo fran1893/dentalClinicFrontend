@@ -32,17 +32,17 @@ export default function Admin() {
 
   // HANDLERS
   const handleUsersList = (e) => {
-    const { page, userId } = e.currentTarget.dataset;
+    const { page, dataId } = e.currentTarget.dataset;
 
     handleUsersListPagination(page);
-    handleSingleUser(userId);
+    handleSingleUser(dataId);
   };
 
   const handleDoctorsList = (e) => {
-    const { page, userId } = e.currentTarget.dataset;
+    const { page, dataId } = e.currentTarget.dataset;
 
     handleDoctorsListPagination(page);
-    handleSingleDoctor(userId);
+    handleSingleDoctor(dataId);
   };
 
   const handleUsersListPagination = (page) => {
@@ -133,7 +133,6 @@ export default function Admin() {
           <DataListTable
             data={newDoctors(doctors)}
             title="Doctores"
-            count={doctorsCount}
             headers={["ID", "Nombre", "Apellido", "Edad", "Email", "Teléfono"]}
             attributes={[
               "id",
@@ -156,7 +155,6 @@ export default function Admin() {
           <DataListTable
             data={newPatients(patients)}
             title="Pacientes"
-            count={patientsCount}
             headers={["ID", "Nombre", "Apellido", "Edad", "Email", "Teléfono"]}
             attributes={[
               "id",
