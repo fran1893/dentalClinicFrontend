@@ -1,7 +1,7 @@
 import React from "react";
 import "./DataListTable.scss";
 import { TablePagination } from "../../components";
-import { dateFormat } from "../../_utils/utils";
+import { MDBTable, MDBTableHead, MDBTableBody } from "mdb-react-ui-kit";
 
 export default function DataListTable({
   data,
@@ -15,8 +15,8 @@ export default function DataListTable({
 }) {
   return (
     <div className={className}>
-      <table>
-        <thead>
+      <MDBTable striped hover className="bg-info bg-gradient rounded-3 bg-opacity-25">
+        <MDBTableHead>
           <tr colSpan={headers.length}>
             <th>
               <div className="tableTitle">{title}</div>
@@ -24,19 +24,19 @@ export default function DataListTable({
           </tr>
           <tr>
             {headers.map((th, index) => (
-              <th key={index}>{th}</th>
+              <th scope="col" key={index}>{th}</th>
             ))}
           </tr>
-        </thead>
-        <tbody>
+        </MDBTableHead>
+        <MDBTableBody>
           {data.map((d) => (
-            <tr data-user-id={d.id} onClick={onChange} key={d.id}>
+            <tr scope="row" data-data-id={d.id} onClick={onChange} key={d.id}>
               {attributes.map((attr, index) => (
                 <td key={index}>{d[attr]}</td>
               ))}
             </tr>
           ))}
-        </tbody>
+        </MDBTableBody>
         {pagination && (
           <tfoot>
             <tr>
@@ -52,7 +52,7 @@ export default function DataListTable({
             </tr>
           </tfoot>
         )}
-      </table>
+      </MDBTable>
     </div>
   );
 }
