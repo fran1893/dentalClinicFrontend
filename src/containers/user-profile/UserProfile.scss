@@ -1,0 +1,14 @@
+.Userprofile {
+    .showButtonContainer{
+        display: flex;
+        justify-content: center;
+    }
+
+    .updateForm {
+        margin-bottom: 1em;
+        .updateButton {
+            display: flex;
+            justify-content: center;
+        }
+    }
+}

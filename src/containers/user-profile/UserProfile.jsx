@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useSelector } from "react-redux";
+import { setUserInfo } from "../../features/authentication/authSlice";
+import { store } from "../../app/store";
 import {
   MDBCol,
   MDBContainer,
@@ -20,6 +22,8 @@ import {
 export default function UserProfile() {
   // HOOKS
   const [profile, setProfile] = useState({});
+  const [formValues, setFormValues] = useState({});
+  const [showForm, setShowForm] = useState(false);
 
   const authState = useSelector((state) => state.auth);
   const navigate = useNavigate();
@@ -42,8 +46,38 @@ export default function UserProfile() {
       console.log(error);
     }
   };
+
+  const updateProfile = async (token, newUserData) => {
+    const response = await userService.updateProfile(token, newUserData);
+  };
+
+  // HANDLERS
+  const handleSubmit = () => {
+    updateProfile(authState.userToken, formValues);
+    if (formValues.nombre) {
+      store.dispatch(setUserInfo({ name: formValues.nombre }));
+    }
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues({
+      ...formValues,
+      [name]: value, //key: value
+    });
+  };
+
+  const handleShowForm = () => {
+    setShowForm(true);
+  };
+
+  const handleHideForm = ()=>{
+    setShowForm(false)
+  }
+
+  // RETURN
   return (
-    <div className="container">
+    <div className="container Userprofile">
       <section className="vh-90">
         <MDBContainer className="py-5 h-100">
           <MDBRow className="justify-content-center align-items-center h-100">
@@ -111,33 +145,110 @@ export default function UserProfile() {
             </MDBCol>
           </MDBRow>
         </MDBContainer>
+        {!showForm && (
+          <div className="showButtonContainer">
+            <Button variant="outline-danger" onClick={handleShowForm}>
+              Actualizar datos
+            </Button>
+          </div>
+        )}
+
+        {showForm && (
+          <div className="showButtonContainer">
+            <Button variant="outline-secondary" onClick={handleHideForm}>
+              No actualizar datos
+            </Button>
+          </div>
+        )}
       </section>
 
-      <Form>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control type="email" placeholder="Enter email" />
-          <Form.Text className="text-muted">
-            Nunca compartiremos tu correo con terceros.
-          </Form.Text>
-        </Form.Group>
+      {showForm && (
+        <section>
+          <Form className="updateForm" noValidate onSubmit={handleSubmit}>
+            <Form.Group className="mb-3">
+              <Form.Label>Nombre</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Actualize su nombre"
+                name="nombre"
+                value={formValues.nombre}
+                onChange={handleChange}
+              />
+            </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            placeholder="Password"
-            aria-describedby="passwordHelpBlock"
-          />
-          <Form.Text id="passwordHelpBlock" muted>
-            Su contraseña debe tener mínimo 8 caracteres y no debe contener
-            espacios.
-          </Form.Text>
-        </Form.Group>
-        <Button variant="primary" type="submit">
-          Submit
-        </Button>
-      </Form>
+            <Form.Group className="mb-3">
+              <Form.Label>Apellido</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Actualize su apellido"
+                name="apellidos"
+                value={formValues.apellidos}
+                onChange={handleChange}
+              />
+              <Form.Text className="text-muted">
+                Debe incluir solo el primer apellido
+              </Form.Text>
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>Edad</Form.Label>
+              <Form.Control
+                type="number"
+                placeholder="Actualize su edad"
+                name="edad"
+                value={formValues.edad}
+                onChange={handleChange}
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>Correo electrónico</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="Actualize su email"
+                name="email"
+                value={formValues.email}
+                onChange={handleChange}
+              />
+              <Form.Text className="text-muted">
+                Nunca compartiremos tu correo con terceros.
+              </Form.Text>
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>Telefono</Form.Label>
+              <Form.Control
+                type="number"
+                placeholder="Actualize su Teléfono"
+                name="telefono"
+                value={formValues.telefono}
+                onChange={handleChange}
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>Nueva contraseña</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Cambie su contraseña"
+                aria-describedby="passwordHelpBlock"
+                name="password"
+                value={formValues.password}
+                onChange={handleChange}
+              />
+              <Form.Text muted>
+                Su contraseña debe tener mínimo 8 caracteres y no debe contener
+                espacios.
+              </Form.Text>
+            </Form.Group>
+            <div className="updateButton">
+              <Button variant="primary" type="submit">
+                Editar
+              </Button>
+            </div>
+          </Form>
+        </section>
+      )}
     </div>
   );
 }
