@@ -216,7 +216,7 @@ export default function UserProfile() {
             </Form.Group>
 
             <Form.Group className="mb-3">
-              <Form.Label>Telefono</Form.Label>
+              <Form.Label>Teléfono</Form.Label>
               <Form.Control
                 type="number"
                 placeholder="Actualize su Teléfono"
@@ -231,7 +231,6 @@ export default function UserProfile() {
               <Form.Control
                 type="password"
                 placeholder="Cambie su contraseña"
-                aria-describedby="passwordHelpBlock"
                 name="password"
                 value={formValues.password}
                 onChange={handleChange}
