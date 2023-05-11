@@ -64,6 +64,14 @@ export default function Citas() {
     }
   };
 
+  const deleteAppointment = async (token, appointId) => {
+    try {
+      await appointmentService.deleteAppointment(token, appointId);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const newCitas = (citas) =>
     citas.map((cita) => {
       cita.centro = cita.Centro.nombre_lugar;
@@ -92,16 +100,18 @@ export default function Citas() {
     setShowForm(false);
   };
 
-  const handleSubmit = () =>{
-    updateAppointment(authState.userToken, formValues, citaId)
-  }
+  const handleSubmit = () => {
+    updateAppointment(authState.userToken, formValues, citaId);
+  };
+
+  const handleDelete = () => {
+    deleteAppointment(authState.userToken, citaId);
+    window.location.reload();
+  };
 
   // RETURN
   return (
     <div className="container Citas">
-      <pre style={{ textAlign: "left", width: "250px", margin: "auto" }}>
-        {JSON.stringify(formValues, null, 2)}
-      </pre>
       <DataListTable
         data={newCitas(citas)}
         title="Citas"
@@ -128,7 +138,7 @@ export default function Citas() {
       {showForm && (
         <div className="updateFormDates">
           <h2>Modificar la cita con ID: {citaId}</h2>
-          <Form onSubmit={handleSubmit}>
+          <Form onSubmit={handleSubmit} className="updateForm">
             <Form.Group className="mb-4">
               <Form.Label>Nueva Fecha</Form.Label>
               <Form.Control
@@ -205,13 +215,15 @@ export default function Citas() {
               />
             </Form.Group>
             <div className="updateDateButtons">
-              <Button variant="primary" type="submit">
+              <Button variant="primary" type="submit" className="formButton">
                 Cambiar Cita
               </Button>
-              <Button variant="success" onClick={handleShowForm}>
+              <Button variant="success" onClick={handleShowForm} className="formButton">
                 No modificar la cita
               </Button>
-              <Button variant="danger">Borrar la cita</Button>
+              <Button variant="danger" onClick={handleDelete} className="formButton">
+                Borrar la cita
+              </Button>
             </div>
           </Form>
         </div>

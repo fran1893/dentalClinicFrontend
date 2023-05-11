@@ -3,6 +3,7 @@ import { global } from "../_global/global";
 
 const appointmentService = {};
 
+// MOSTRAR CITAS PACIENTE
 appointmentService.getAppointmentPatient = async (token) => {
   const config = {
     headers: {
@@ -15,6 +16,7 @@ appointmentService.getAppointmentPatient = async (token) => {
   ).data;
 };
 
+// MOSTRAR CITAS DOCTOR
 appointmentService.getAppointmentDoctor = async (token) => {
   const config = {
     headers: {
@@ -30,6 +32,7 @@ appointmentService.getAppointmentDoctor = async (token) => {
   ).data;
 };
 
+// ACTUALIZAR CITA
 appointmentService.updateAppointment = async (
   token,
   appointData,
@@ -50,6 +53,19 @@ appointmentService.updateAppointment = async (
 
   return (
     await axios.put(global.BASE_URL + `/appointment/${appointId}`, body, config)
+  ).data;
+};
+
+// BORRAR CITA
+appointmentService.deleteAppointment = async (token, appointId) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  return (
+    await axios.delete(global.BASE_URL + `/appointment/${appointId}`, config)
   ).data;
 };
 
