@@ -61,7 +61,7 @@ export default function Header() {
             )}
             {isLoggedIn && (
               <Nav>
-                <NavDropdown title={name} id="collasible-nav-dropdown">
+                <NavDropdown title={name} id="collasible-nav-dropdown" align={"end"}>
                   <NavDropdown.Item href="/profile">
                     <MdPersonOutline /> Perfil
                   </NavDropdown.Item>
