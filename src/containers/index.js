@@ -4,8 +4,9 @@ import Citas from "./citas/";
 import Home from "./home/";
 import Login from "./login/";
 import Register from "./register/";
-import UserProfile from "./user-profile/UserProfile";
-import PageNotFound from "./page-not-found/PageNotFound";
+import UserProfile from "./user-profile";
+import PageNotFound from "./page-not-found";
+import CreateAppoint from "./create-appointment";
 
 export {
   About,
@@ -16,4 +17,5 @@ export {
   Register,
   UserProfile,
   PageNotFound,
+  CreateAppoint,
 };

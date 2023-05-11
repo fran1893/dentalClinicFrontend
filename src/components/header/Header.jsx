@@ -36,9 +36,14 @@ export default function Header() {
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
               {!isAdmin && isLoggedIn && (
-                <NavLink className="nav-link" to="/dates">
-                  Citas
-                </NavLink>
+                <>
+                  <NavLink className="nav-link" to="/dates">
+                    Citas
+                  </NavLink>
+                  <NavLink className="nav-link" to="/create-appointment">
+                    Crear Cita
+                  </NavLink>
+                </>
               )}
               <NavLink className="nav-link" to="/about">
                 Acerca de
@@ -61,7 +66,11 @@ export default function Header() {
             )}
             {isLoggedIn && (
               <Nav>
-                <NavDropdown title={name} id="collasible-nav-dropdown" align={"end"}>
+                <NavDropdown
+                  title={name}
+                  id="collasible-nav-dropdown"
+                  align={"end"}
+                >
                   <NavDropdown.Item href="/profile">
                     <MdPersonOutline /> Perfil
                   </NavDropdown.Item>
