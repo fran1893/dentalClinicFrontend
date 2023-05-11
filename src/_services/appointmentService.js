@@ -30,4 +30,27 @@ appointmentService.getAppointmentDoctor = async (token) => {
   ).data;
 };
 
+appointmentService.updateAppointment = async (
+  token,
+  appointData,
+  appointId
+) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const body = {
+    fecha: appointData.fecha,
+    horario: appointData.horario,
+    tratamiento: appointData.tratamiento,
+    id_centro: appointData.id_centro,
+  };
+
+  return (
+    await axios.put(global.BASE_URL + `/appointment/${appointId}`, body, config)
+  ).data;
+};
+
 export default appointmentService;

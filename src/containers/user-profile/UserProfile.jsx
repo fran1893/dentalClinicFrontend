@@ -48,7 +48,7 @@ export default function UserProfile() {
   };
 
   const updateProfile = async (token, newUserData) => {
-    const response = await userService.updateProfile(token, newUserData);
+     await userService.updateProfile(token, newUserData);
   };
 
   // HANDLERS
