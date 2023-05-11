@@ -69,4 +69,25 @@ appointmentService.deleteAppointment = async (token, appointId) => {
   ).data;
 };
 
+// CREAR CITA PACIENTE
+appointmentService.createAppointment = async (token, newAppointData) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const body = {
+    fecha: newAppointData.fecha,
+    horario: newAppointData.horario,
+    tratamiento: newAppointData.tratamiento,
+    id_doctor: newAppointData.id_doctor,
+    id_centro: newAppointData.id_centro,
+  };
+
+  return (
+    await axios.post(global.BASE_URL + `/appointment/patient`, body, config)
+  ).data;
+};
+
 export default appointmentService;
