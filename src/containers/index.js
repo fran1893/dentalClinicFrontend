@@ -7,6 +7,7 @@ import Register from "./register/";
 import UserProfile from "./user-profile";
 import PageNotFound from "./page-not-found";
 import CreateAppoint from "./create-appointment";
+import RegisterDoctor from "./register-doctor";
 
 export {
   About,
@@ -18,4 +19,5 @@ export {
   UserProfile,
   PageNotFound,
   CreateAppoint,
+  RegisterDoctor,
 };

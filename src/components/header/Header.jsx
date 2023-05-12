@@ -49,9 +49,14 @@ export default function Header() {
                 Acerca de
               </NavLink>
               {isAdmin && (
-                <NavLink className="nav-link" to="/admin">
-                  Admin
-                </NavLink>
+                <>
+                  <NavLink className="nav-link" to="/admin">
+                    Admin
+                  </NavLink>
+                  <NavLink className="nav-link" to="/register-doctor">
+                    Registrar doctor
+                  </NavLink>
+                </>
               )}
             </Nav>
             {!isLoggedIn && (

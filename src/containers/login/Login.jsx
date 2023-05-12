@@ -8,7 +8,7 @@ import "./Login.scss";
 
 export default function Login() {
   const initialFormValues = {
-    email: "bolso@gmail.com",
+    email: "pancho@gmail.com",
     password: "12345678",
   };
 
@@ -55,7 +55,7 @@ export default function Login() {
     const { name, value } = e.target;
     setFormValues({
       ...formValues,
-      [name]: value, //key: value
+      [name]: value,
     });
   };
 

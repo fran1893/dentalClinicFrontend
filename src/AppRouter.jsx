@@ -10,6 +10,7 @@ import {
   UserProfile,
   PageNotFound,
   CreateAppoint,
+  RegisterDoctor
 } from "./containers";
 
 export default function AppRouter() {
@@ -23,6 +24,7 @@ export default function AppRouter() {
       <Route path="profile" element={<UserProfile />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/register-doctor" element={<RegisterDoctor />} />
       <Route path="*" exact={true} element={<PageNotFound />} />
     </Routes>
   );
