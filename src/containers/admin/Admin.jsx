@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import userService from "../../_services/userService";
 import { DataListTable } from "../../components";
+import "./Admin.scss";
 
 export default function Admin() {
   // HOOKS
@@ -128,8 +129,11 @@ export default function Admin() {
   return (
     <>
       {isAdmin && (
-        <div className="container">
-          <h1>Admin</h1>
+        <div className="container Admin">
+          <div className="title">
+            <h1 className="text-center title">Panel de Admin</h1>
+          </div>
+
           <DataListTable
             data={newDoctors(doctors)}
             title="Doctores"

@@ -1,9 +1,6 @@
-// #root {
-//     max-width: 1280px;
-//     margin: 0 auto;
-//     padding: 2rem;
-//     text-align: center;
-//   }
+#root {
+    font-family: 'Arvo';
+  }
 
 $white: #ffffff;
 
@@ -19,3 +16,4 @@ $theme-colors: (
 );
 
 @import 'bootstrap/scss/bootstrap.scss';
+@import url('https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;1,700&display=swap');
