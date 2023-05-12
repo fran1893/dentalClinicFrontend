@@ -18,6 +18,7 @@ import {
   MDBTypography,
   MDBIcon,
 } from "mdb-react-ui-kit";
+import profileImage from "../../assets/logo-clinic.png"
 
 export default function UserProfile() {
   // HOOKS
@@ -78,7 +79,7 @@ export default function UserProfile() {
   // RETURN
   return (
     <div className="container Userprofile">
-      <section className="vh-90">
+      <section>
         <MDBContainer className="py-5 h-100">
           <MDBRow className="justify-content-center align-items-center h-100">
             <MDBCol lg="6" className="mb-4 mb-lg-0">
@@ -100,7 +101,7 @@ export default function UserProfile() {
                     }}
                   >
                     <MDBCardImage
-                      src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+                      src={profileImage}
                       alt="Avatar"
                       className="my-5"
                       style={{ width: "80px" }}
@@ -119,19 +120,19 @@ export default function UserProfile() {
                       <MDBTypography tag="h6">Información</MDBTypography>
                       <hr className="mt-0 mb-4" />
                       <MDBRow className="pt-1">
-                        <MDBCol size="6" className="mb-3">
+                        <MDBCol className="mb-3 col-12">
                           <MDBTypography tag="h6">Email</MDBTypography>
                           <MDBCardText className="text-muted">
                             {profile.email}
                           </MDBCardText>
                         </MDBCol>
-                        <MDBCol size="6" className="mb-3">
+                        <MDBCol  className="mb-3 col-12 col-md-6">
                           <MDBTypography tag="h6">Teléfono</MDBTypography>
                           <MDBCardText className="text-muted">
                             {profile.telefono}
                           </MDBCardText>
                         </MDBCol>
-                        <MDBCol size="6" className="mb-3">
+                        <MDBCol className="mb-3 col-12 col-md-6">
                           <MDBTypography tag="h6">Edad</MDBTypography>
                           <MDBCardText className="text-muted">
                             {profile.edad}
@@ -163,7 +164,7 @@ export default function UserProfile() {
       </section>
 
       {showForm && (
-        <section>
+        <section >
           <Form className="updateForm" noValidate onSubmit={handleSubmit}>
             <Form.Group className="mb-3">
               <Form.Label>Nombre</Form.Label>
