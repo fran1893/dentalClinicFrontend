@@ -7,9 +7,24 @@
 
     .updateForm {
         margin-bottom: 1em;
+        label{
+            color: rgb(38, 60, 228);
+        }
         .updateButton {
             display: flex;
             justify-content: center;
         }
     }
 }
+
+@media (min-width: 600px) {
+    .Userprofile{
+        .formContainer{
+            display: flex;
+            justify-content: center;
+        }
+        .updateForm{
+            width: 60%;
+        }
+    }
+  }

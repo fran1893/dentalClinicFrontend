@@ -164,7 +164,7 @@ export default function UserProfile() {
       </section>
 
       {showForm && (
-        <section >
+        <section className="formContainer">
           <Form className="updateForm" noValidate onSubmit={handleSubmit}>
             <Form.Group className="mb-3">
               <Form.Label>Nombre</Form.Label>
