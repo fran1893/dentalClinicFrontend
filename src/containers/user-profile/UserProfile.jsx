@@ -18,7 +18,7 @@ import {
   MDBTypography,
   MDBIcon,
 } from "mdb-react-ui-kit";
-import profileImage from "../../assets/logo-clinic.png"
+import profileImage from "../../assets/profile-image.png"
 
 export default function UserProfile() {
   // HOOKS
