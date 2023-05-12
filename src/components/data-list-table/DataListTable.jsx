@@ -9,13 +9,13 @@ export default function DataListTable({
   headers,
   attributes,
   onChange,
-  className,
 
   pagination = null,
 }) {
   return (
-    <div className={className}>
+    <div className="DataListTable">
       <div style={{ overflowX: "auto" }}>
+        <div className="mobileTableTitle">{title}</div>
         <MDBTable
           striped
           hover
@@ -39,7 +39,9 @@ export default function DataListTable({
             {data.map((d) => (
               <tr scope="row" data-data-id={d.id} onClick={onChange} key={d.id}>
                 {attributes.map((attr, index) => (
-                  <td key={index}>{d[attr]}</td>
+                  <td data-label={headers[index]} key={index}>
+                    {d[attr] ? d[attr] : "No definido"}
+                  </td>
                 ))}
               </tr>
             ))}
