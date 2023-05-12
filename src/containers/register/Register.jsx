@@ -47,12 +47,12 @@ export default function Register() {
       {showForm && (
         <MDBRow className="d-flex justify-content-center align-items-center h-100">
           <MDBCol>
-            <MDBCard className="my-4">
+            <MDBCard className="my-4 registerCard">
               <MDBRow className="g-0">
                 <MDBCol md="6" className="d-none d-md-block">
                   <MDBCardImage
                     src= {registerImage}
-                    alt="Sample photo"
+                    alt="Clinic Logo"
                     fluid
                   />
                 </MDBCol>
