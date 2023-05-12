@@ -12,6 +12,7 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
+import navLogo from "../../assets/logo-clinic.png";
 
 export default function Header() {
   // hooks
@@ -29,9 +30,17 @@ export default function Header() {
 
   return (
     <div className="Header">
-      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+      <Navbar className="bg-gradient" collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand href="/">Home</Navbar.Brand>
+          <Navbar.Brand href="/">
+            <img
+              src={navLogo}
+              width="50"
+              height="50"
+              className="d-inline-block align-top"
+              alt="React Bootstrap logo"
+            />
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
