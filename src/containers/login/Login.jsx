@@ -4,11 +4,11 @@ import { updateAuthStoreStateLogIn } from "../../features/authentication/updateA
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import validator from "validator";
-import "./Login.scss"
+import "./Login.scss";
 
 export default function Login() {
   const initialFormValues = {
-    email: "pancho@gmail.com",
+    email: "bolso@gmail.com",
     password: "12345678",
   };
 
@@ -36,7 +36,7 @@ export default function Login() {
       email: formValues.email,
       password: formValues.password,
     };
-    // login(credentials);
+
     if (
       validator.isEmail(credentials.email) &&
       validator.isByteLength(credentials.password, { min: 8, max: undefined })
