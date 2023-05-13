@@ -1,0 +1,28 @@
+.CreateAppoint {
+    margin-top: 2em;
+
+    .appointButton{
+        display: flex;
+        justify-content: center;
+        padding: 1.5em;
+    }
+
+    .updateForm {
+        margin-top: 2em;
+        border-radius: 1em;
+        padding: 1em;
+        background-color: rgba(255,255,255,0.5);
+
+        .form-label{
+            color: rgb(33, 96, 231);
+        }
+    }
+}
+
+@media (min-width: 992px) {
+    .CreateAppoint{
+        .updateForm {
+            width: 70%;
+        }
+    }
+}

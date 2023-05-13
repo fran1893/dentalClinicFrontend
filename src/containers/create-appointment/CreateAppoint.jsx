@@ -14,6 +14,7 @@ export default function CreateAppoint() {
   const isPatient = authState.userInfo.role == "user";
   const [isAppointCreated, setIsAppointCreated] = useState(false);
   const [showForm, setShowForm] = useState(true);
+  const [validated, setValidated] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -40,10 +41,19 @@ export default function CreateAppoint() {
     });
   };
 
-  const handleSubmit = () => {
-    createAppointment(authState.userToken, formValues);
-    setIsAppointCreated(true);
-    setShowForm(false);
+  const handleSubmit = (event) => {
+    const form = event.currentTarget;
+
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    } else {
+      createAppointment(authState.userToken, formValues);
+      setIsAppointCreated(true);
+      setShowForm(false);
+    }
+
+    setValidated(true);
   };
 
   const handleShowForm = () => {
@@ -52,7 +62,7 @@ export default function CreateAppoint() {
   };
   // RETURN
   return (
-    <div className="container">
+    <div className="container CreateAppoint">
       {isAppointCreated && (
         <>
           <h2>Cita Creada!</h2>
@@ -64,10 +74,16 @@ export default function CreateAppoint() {
       {showForm && (
         <>
           <h1>Crea una cita en nuestra clínica</h1>
-          <Form className="updateForm" onSubmit={handleSubmit}>
+          <Form
+            className="updateForm"
+            onSubmit={handleSubmit}
+            noValidate
+            validated={validated}
+          >
             <Form.Group className="mb-4">
-              <Form.Label>Nueva Fecha</Form.Label>
+              <Form.Label style={{color: "rgb(33, 96, 231)"}}>Nueva Fecha</Form.Label>
               <Form.Control
+                required
                 type="date"
                 name="fecha"
                 value={formValues.fecha}
@@ -79,6 +95,7 @@ export default function CreateAppoint() {
               <Form.Label>Elegir horario</Form.Label>
               <br />
               <Form.Check
+                required
                 inline
                 type={"radio"}
                 name="horario"
@@ -108,6 +125,7 @@ export default function CreateAppoint() {
             <Form.Group className="mb-4">
               <Form.Label>Tratamiento</Form.Label>
               <Form.Control
+                required
                 type="text"
                 placeholder="Escriba su consulta"
                 name="tratamiento"
@@ -119,6 +137,7 @@ export default function CreateAppoint() {
             <Form.Group className="mb-4">
               <Form.Label>Elige el Doctor</Form.Label>
               <Form.Check
+                required
                 type={"radio"}
                 name="id_doctor"
                 value={1}
@@ -137,6 +156,7 @@ export default function CreateAppoint() {
             <Form.Group className="mb-4">
               <Form.Label>Elegir el centro</Form.Label>
               <Form.Check
+                required
                 type={"radio"}
                 name="id_centro"
                 value={1}
@@ -158,10 +178,11 @@ export default function CreateAppoint() {
                 onChange={handleChange}
               />
             </Form.Group>
-
-            <Button variant="primary" type="submit" className="formButton">
-              Crear cita
-            </Button>
+            <div className="appointButton">
+              <Button variant="primary" type="submit" className="formButton">
+                Crear cita
+              </Button>
+            </div>
           </Form>
         </>
       )}
