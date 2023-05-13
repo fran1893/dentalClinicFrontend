@@ -36,14 +36,14 @@ export default function Admin() {
     const { page, dataId } = e.currentTarget.dataset;
 
     handleUsersListPagination(page);
-    handleSingleUser(dataId);
+    // handleSingleUser(dataId);
   };
 
   const handleDoctorsList = (e) => {
     const { page, dataId } = e.currentTarget.dataset;
 
     handleDoctorsListPagination(page);
-    handleSingleDoctor(dataId);
+    // handleSingleDoctor(dataId);
   };
 
   const handleUsersListPagination = (page) => {
@@ -72,13 +72,13 @@ export default function Admin() {
     }
   };
 
-  const handleSingleUser = (id) => {
-    console.log(id);
-  };
+  // const handleSingleUser = (id) => {
+  //   console.log(id);
+  // };
 
-  const handleSingleDoctor = (id) => {
-    console.log(id);
-  };
+  // const handleSingleDoctor = (id) => {
+  //   console.log(id);
+  // };
 
   // FUNCTIONS
   const getAllPatients = async (token, page) => {
