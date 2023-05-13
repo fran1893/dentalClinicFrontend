@@ -19,12 +19,16 @@ import {
   MDBIcon,
 } from "mdb-react-ui-kit";
 import profileImage from "../../assets/profile-image.png";
+import validator from "validator";
 
 export default function UserProfile() {
   // HOOKS
   const [profile, setProfile] = useState({});
   const [formValues, setFormValues] = useState({});
   const [showForm, setShowForm] = useState(false);
+  const [updateError, setUpdateError] = useState(null);
+  const [updateEmailError, setUpdateEmailError] = useState(null);
+  const [validated, setValidated] = useState(false);
 
   const authState = useSelector((state) => state.auth);
   const navigate = useNavigate();
@@ -53,11 +57,40 @@ export default function UserProfile() {
   };
 
   // HANDLERS
-  const handleSubmit = () => {
-    updateProfile(authState.userToken, formValues);
-    if (formValues.nombre) {
-      store.dispatch(setUserInfo({ name: formValues.nombre }));
+  const handleSubmit = (event) => {
+    const form = event.currentTarget;
+
+    if (formValues.password) {
+      if (
+        !validator.isByteLength(formValues.password, { min: 8, max: undefined })
+      ) {
+        event.preventDefault();
+        setUpdateError("La contraseña debe contener mínimo 8 caracteres");
+      } else if (
+        validator.isByteLength(formValues.password, { min: 8, max: undefined })
+      ) {
+        setUpdateError(null);
+      }
     }
+
+    if (formValues.email) {
+      if (!validator.isEmail(formValues.email)) {
+        event.preventDefault();
+        setUpdateEmailError("Introduce un email correcto");
+      } else if (validator.isEmail(formValues.email)) {
+        setUpdateEmailError(null);
+      }
+    }
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    } else {
+      updateProfile(authState.userToken, formValues);
+      if (formValues.nombre) {
+        store.dispatch(setUserInfo({ name: formValues.nombre }));
+      }
+    }
+    setValidated(true);
   };
 
   const handleChange = (e) => {
@@ -148,7 +181,7 @@ export default function UserProfile() {
         </MDBContainer>
         {!showForm && (
           <div className="showButtonContainer">
-            <Button variant="outline-danger" onClick={handleShowForm}>
+            <Button variant="danger" onClick={handleShowForm}>
               Actualizar datos
             </Button>
           </div>
@@ -156,7 +189,7 @@ export default function UserProfile() {
 
         {showForm && (
           <div className="showButtonContainer">
-            <Button variant="outline-secondary" onClick={handleHideForm}>
+            <Button variant="secondary" onClick={handleHideForm}>
               No actualizar datos
             </Button>
           </div>
@@ -165,7 +198,12 @@ export default function UserProfile() {
 
       {showForm && (
         <section className="formContainer">
-          <Form className="updateForm" noValidate onSubmit={handleSubmit}>
+          <Form
+            className="updateForm"
+            noValidate
+            validated={validated}
+            onSubmit={handleSubmit}
+          >
             <Form.Group className="mb-3">
               <Form.Label>Nombre</Form.Label>
               <Form.Control
@@ -229,17 +267,22 @@ export default function UserProfile() {
             <Form.Group className="mb-3">
               <Form.Label>Nueva contraseña</Form.Label>
               <Form.Control
+                
                 type="password"
                 placeholder="Cambie su contraseña"
                 name="password"
                 value={formValues.password}
                 onChange={handleChange}
               />
-              <Form.Text muted>
+              <Form.Text>
                 Su contraseña debe tener mínimo 8 caracteres y no debe contener
                 espacios.
               </Form.Text>
             </Form.Group>
+            {updateError && <p style={{ color: "red" }}>{updateError}</p>}
+            {updateEmailError && (
+              <p style={{ color: "red" }}>{updateEmailError}</p>
+            )}
             <div className="updateButton">
               <Button variant="primary" type="submit">
                 Editar

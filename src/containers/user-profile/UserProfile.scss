@@ -1,8 +1,15 @@
 .Userprofile {
     margin-bottom: 2em;
+
+    .formContainer{
+        border-radius: 1em;
+        padding: 1em;
+        background-color: rgba(255, 255, 255, 0.5);
+    }
     .showButtonContainer{
         display: flex;
         justify-content: center;
+        margin-bottom: 1em;
     }
 
     .updateForm {
