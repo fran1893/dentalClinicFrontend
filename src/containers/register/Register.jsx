@@ -11,12 +11,15 @@ import {
 import Button from "react-bootstrap/Button";
 import authService from "../../_services/authService";
 import Form from "react-bootstrap/Form";
-import registerImage from "../../assets/register-image.png"
+import registerImage from "../../assets/register-image.png";
+import validator from "validator";
 
 export default function Register() {
   // HOOKS
   const [formValues, setFormValues] = useState({});
   const [showForm, setShowForm] = useState(true);
+  const [validated, setValidated] = useState(false);
+  const [registerError, setRegisterError] = useState(null);
 
   // FUNCTIONS
 
@@ -33,9 +36,29 @@ export default function Register() {
     });
   };
 
-  const handleSubmit = () => {
-    registerUser(formValues);
-    setShowForm(false);
+  const handleSubmit = (event) => {
+    const form = event.currentTarget;
+
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    } else {
+      registerUser(formValues);
+      setShowForm(false);
+    }
+    setValidated(true);
+
+    if (formValues.password) {
+      if (
+        !validator.isByteLength(formValues.password, { min: 8, max: undefined })
+      ) {
+        setRegisterError("La contraseña debe contener mínimo 8 caracteres");
+      } else if (
+        validator.isByteLength(formValues.password, { min: 8, max: undefined })
+      ) {
+        setRegisterError(null);
+      }
+    }
   };
   return (
     <div className="Register container">
@@ -50,15 +73,16 @@ export default function Register() {
             <MDBCard className="my-4 registerCard">
               <MDBRow className="g-0">
                 <MDBCol md="6" className="d-none d-md-block">
-                  <MDBCardImage
-                    src= {registerImage}
-                    alt="Clinic Logo"
-                    fluid
-                  />
+                  <MDBCardImage src={registerImage} alt="Clinic Logo" fluid />
                 </MDBCol>
 
                 <MDBCol md="6">
-                  <Form onSubmit={handleSubmit} className="registerForm">
+                  <Form
+                    onSubmit={handleSubmit}
+                    className="registerForm"
+                    noValidate
+                    validated={validated}
+                  >
                     <MDBCardBody className="text-black d-flex flex-column justify-content-center">
                       <h3 className="mb-5 text-uppercase fw-bold">
                         Registrate en nuestra clínica!
@@ -67,6 +91,7 @@ export default function Register() {
                       <MDBRow>
                         <MDBCol md="6">
                           <MDBInput
+                            required
                             wrapperClass="mb-4"
                             label="Nombre"
                             size="lg"
@@ -78,6 +103,7 @@ export default function Register() {
                         </MDBCol>
                         <MDBCol md="6">
                           <MDBInput
+                            required
                             wrapperClass="mb-4"
                             label="Apellido"
                             size="lg"
@@ -89,6 +115,7 @@ export default function Register() {
                         </MDBCol>
                       </MDBRow>
                       <MDBInput
+                        required
                         wrapperClass="mb-4"
                         label="Edad"
                         size="lg"
@@ -98,6 +125,7 @@ export default function Register() {
                         value={formValues.edad}
                       />
                       <MDBInput
+                        required
                         wrapperClass="mb-4"
                         label="Email"
                         size="lg"
@@ -107,6 +135,7 @@ export default function Register() {
                         value={formValues.email}
                       />
                       <MDBInput
+                        required
                         wrapperClass="mb-4"
                         label="Contraseña"
                         size="lg"
@@ -116,7 +145,10 @@ export default function Register() {
                         value={formValues.password}
                       />
 
-                      <div className="d-flex justify-content-center pt-3">
+                      <div className="d-flex flex-column justify-content-center pt-3">
+                        {registerError && (
+                          <p style={{ color: "red" }}>{registerError}</p>
+                        )}
                         <Button
                           className="ms-2"
                           variant="success"
