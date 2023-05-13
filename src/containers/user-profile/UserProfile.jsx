@@ -18,7 +18,7 @@ import {
   MDBTypography,
   MDBIcon,
 } from "mdb-react-ui-kit";
-import profileImage from "../../assets/profile-image.png"
+import profileImage from "../../assets/profile-image.png";
 
 export default function UserProfile() {
   // HOOKS
@@ -49,7 +49,7 @@ export default function UserProfile() {
   };
 
   const updateProfile = async (token, newUserData) => {
-     await userService.updateProfile(token, newUserData);
+    await userService.updateProfile(token, newUserData);
   };
 
   // HANDLERS
@@ -72,9 +72,9 @@ export default function UserProfile() {
     setShowForm(true);
   };
 
-  const handleHideForm = ()=>{
-    setShowForm(false)
-  }
+  const handleHideForm = () => {
+    setShowForm(false);
+  };
 
   // RETURN
   return (
@@ -126,7 +126,7 @@ export default function UserProfile() {
                             {profile.email}
                           </MDBCardText>
                         </MDBCol>
-                        <MDBCol  className="mb-3 col-12 col-md-6">
+                        <MDBCol className="mb-3 col-12 col-md-6">
                           <MDBTypography tag="h6">Teléfono</MDBTypography>
                           <MDBCardText className="text-muted">
                             {profile.telefono}
@@ -176,7 +176,6 @@ export default function UserProfile() {
                 onChange={handleChange}
               />
             </Form.Group>
-
             <Form.Group className="mb-3">
               <Form.Label>Apellido</Form.Label>
               <Form.Control

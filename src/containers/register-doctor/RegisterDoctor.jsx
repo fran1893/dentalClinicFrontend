@@ -14,6 +14,7 @@ import Button from "react-bootstrap/Button";
 import authService from "../../_services/authService";
 import Form from "react-bootstrap/Form";
 import registerImage from "../../assets/register-doctor-image.png";
+import validator from "validator";
 import "./RegisterDoctor.scss";
 
 export default function RegisterDoctor() {
@@ -24,6 +25,8 @@ export default function RegisterDoctor() {
   const navigate = useNavigate();
   const isAdmin = authState.userInfo.role == "admin";
   const isLoggedIn = authState.isLoggedIn;
+  const [validated, setValidated] = useState(false);
+  const [registerError, setRegisterError] = useState(null);
 
   useEffect(() => {
     if (!isLoggedIn && !isAdmin) {
@@ -45,9 +48,24 @@ export default function RegisterDoctor() {
     });
   };
 
-  const handleSubmit = () => {
-    registerDoctor(formValues, authState.userToken);
-    setShowForm(false);
+  const handleSubmit = (event) => {
+    const form = event.currentTarget;
+
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    } else {
+      registerDoctor(formValues, authState.userToken);
+      setShowForm(false);
+    }
+    if (
+      !validator.isByteLength(formValues.password, { min: 8, max: undefined })
+    ) {
+      setRegisterError("La contraseña debe contener mínimo 8 caracteres");
+    } else if(validator.isByteLength(formValues.password, { min: 8, max: undefined })){
+      setRegisterError(null)
+    }
+    setValidated(true);
   };
 
   const handleShowForm = () => {
@@ -73,7 +91,11 @@ export default function RegisterDoctor() {
                 </MDBCol>
 
                 <MDBCol md="6">
-                  <Form onSubmit={handleSubmit}>
+                  <Form
+                    onSubmit={handleSubmit}
+                    noValidate
+                    validated={validated}
+                  >
                     <MDBCardBody className="text-black d-flex flex-column justify-content-center">
                       <h3 className="mb-5 text-uppercase fw-bold">
                         Registrar un Doctor
@@ -82,6 +104,7 @@ export default function RegisterDoctor() {
                       <MDBRow>
                         <MDBCol md="6">
                           <MDBInput
+                            required
                             wrapperClass="mb-4"
                             label="Nombre"
                             size="lg"
@@ -93,6 +116,7 @@ export default function RegisterDoctor() {
                         </MDBCol>
                         <MDBCol md="6">
                           <MDBInput
+                            required
                             wrapperClass="mb-4"
                             label="Apellido"
                             size="lg"
@@ -104,6 +128,7 @@ export default function RegisterDoctor() {
                         </MDBCol>
                       </MDBRow>
                       <MDBInput
+                        required
                         wrapperClass="mb-4"
                         label="Edad"
                         size="lg"
@@ -115,6 +140,7 @@ export default function RegisterDoctor() {
                       <div className="d-md-flex ustify-content-start align-items-center mb-4">
                         <h6 className="fw-bold mb-0 me-4">Activo: </h6>
                         <MDBRadio
+                          required
                           name="activo"
                           id="inlineRadio1"
                           value="si"
@@ -132,6 +158,7 @@ export default function RegisterDoctor() {
                         />
                       </div>
                       <MDBInput
+                        required
                         wrapperClass="mb-4"
                         label="Email"
                         size="lg"
@@ -141,6 +168,7 @@ export default function RegisterDoctor() {
                         value={formValues.email}
                       />
                       <MDBInput
+                        required
                         wrapperClass="mb-4"
                         label="Contraseña"
                         size="lg"
@@ -150,14 +178,17 @@ export default function RegisterDoctor() {
                         value={formValues.password}
                       />
 
-                      <div className="d-flex justify-content-center pt-3">
+                      <div className="d-flex flex-column justify-content-center pt-3">
+                        {registerError && (
+                          <p style={{ color: "red" }}>{registerError}</p>
+                        )}
                         <Button
                           className="ms-2"
                           variant="success"
                           size="lg"
                           type="submit"
                         >
-                          Registrarse
+                          Registrar
                         </Button>
                       </div>
                     </MDBCardBody>
