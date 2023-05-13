@@ -58,14 +58,16 @@ export default function RegisterDoctor() {
       registerDoctor(formValues, authState.userToken);
       setShowForm(false);
     }
+    setValidated(true);
     if (
       !validator.isByteLength(formValues.password, { min: 8, max: undefined })
     ) {
       setRegisterError("La contraseña debe contener mínimo 8 caracteres");
-    } else if(validator.isByteLength(formValues.password, { min: 8, max: undefined })){
-      setRegisterError(null)
+    } else if (
+      validator.isByteLength(formValues.password, { min: 8, max: undefined })
+    ) {
+      setRegisterError(null);
     }
-    setValidated(true);
   };
 
   const handleShowForm = () => {
