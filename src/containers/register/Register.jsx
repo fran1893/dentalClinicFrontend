@@ -58,7 +58,7 @@ export default function Register() {
                 </MDBCol>
 
                 <MDBCol md="6">
-                  <Form onSubmit={handleSubmit}>
+                  <Form onSubmit={handleSubmit} className="registerForm">
                     <MDBCardBody className="text-black d-flex flex-column justify-content-center">
                       <h3 className="mb-5 text-uppercase fw-bold">
                         Registrate en nuestra clínica!
