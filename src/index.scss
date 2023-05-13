@@ -63,7 +63,7 @@ button:focus-visible {
   display: none;
 }
 
-@media screen and (max-width: 600px) {
+@media (max-width: 600px) {
 
   body{
     height: 100%;
@@ -76,13 +76,13 @@ button:focus-visible {
   .mobileTableTitle {
     display: block;
     font-size: 40px;
+    font-weight: bold;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
   }
 
   table thead {
     border: none;
-    clip: rect(0 0 0 0);
     height: 1px;
     margin: -1px;
     overflow: hidden;
@@ -92,9 +92,8 @@ button:focus-visible {
   }
 
   table tr {
-    border-bottom: 3px solid #ddd;
+    border-bottom: 3px solid #0c0c0c;
     display: block;
-    margin-bottom: 1.625em;
   }
 
   table td {
@@ -102,6 +101,10 @@ button:focus-visible {
     display: block;
     font-size: 0.8em;
     text-align: right;
+  }
+
+  tfoot tr{
+    border-bottom: none;
   }
 
   table td::before {
