@@ -19,7 +19,7 @@ export default function DataListTable({
         <MDBTable
           striped
           hover
-          className="bg-info bg-gradient rounded-3 bg-opacity-25"
+          className="bg-success bg-gradient rounded-3 bg-opacity-25"
         >
           <MDBTableHead>
             <tr colSpan={headers.length}>
