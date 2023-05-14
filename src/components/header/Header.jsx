@@ -30,7 +30,13 @@ export default function Header() {
 
   return (
     <div className="Header">
-      <Navbar className="bg-gradient" collapseOnSelect expand="lg" bg="dark" variant="dark">
+      <Navbar
+        className="bg-gradient"
+        collapseOnSelect
+        expand="lg"
+        bg="dark"
+        variant="dark"
+      >
         <Container>
           <Navbar.Brand href="/">
             <img
@@ -54,9 +60,6 @@ export default function Header() {
                   </NavLink>
                 </>
               )}
-              <NavLink className="nav-link" to="/about">
-                Acerca de
-              </NavLink>
               {isAdmin && (
                 <>
                   <NavLink className="nav-link" to="/admin">

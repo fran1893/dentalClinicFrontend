@@ -4,9 +4,16 @@ import { Button, Container, Row, Col, Card, CardGroup } from "react-bootstrap";
 import dentalCleaning from "../../assets/dental-cleaning.jpg";
 import dentalWhitening from "../../assets/whitening.jpg";
 import dentalBrakets from "../../assets/brakets.jpg";
-import {Footer} from "../../components";
+import { Footer } from "../../components";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
+  const navigate = useNavigate();
+
+  // HANDLERS
+  const handleClickRegister = () => {
+    navigate("/register");
+  };
   return (
     <div className="Home">
       <div className="text-center welcome">
@@ -28,7 +35,7 @@ export default function Home() {
             </p>
           </div>
           <div className="buttonWelcome text-center">
-            <Button size="lg" variant="primary">
+            <Button onClick={handleClickRegister} size="lg" variant="primary">
               ¡Regístrate y crea una cita!
             </Button>
           </div>
@@ -45,7 +52,7 @@ export default function Home() {
               dientes y encías saludables.
             </Card.Text>
           </Card.Body>
-          <Card.Footer className="text-center">
+          <Card.Footer onClick={handleClickRegister} className="text-center">
             <small className="text-muted">¡Registrate y pide cita!</small>
           </Card.Footer>
         </Card>
@@ -58,7 +65,7 @@ export default function Home() {
               blanqueamiento dental.
             </Card.Text>
           </Card.Body>
-          <Card.Footer className="text-center">
+          <Card.Footer onClick={handleClickRegister} className="text-center">
             <small className="text-muted">¡Registrate y pide cita!</small>
           </Card.Footer>
         </Card>
@@ -71,7 +78,7 @@ export default function Home() {
               opciones de ortodoncia.
             </Card.Text>
           </Card.Body>
-          <Card.Footer className="text-center">
+          <Card.Footer onClick={handleClickRegister} className="text-center">
             <small className="text-muted">¡Registrate y pide cita!</small>
           </Card.Footer>
         </Card>
