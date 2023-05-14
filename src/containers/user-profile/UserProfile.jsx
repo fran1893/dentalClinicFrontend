@@ -60,31 +60,38 @@ export default function UserProfile() {
   const handleSubmit = (event) => {
     const form = event.currentTarget;
 
-    if (formValues.password) {
-      if (
-        !validator.isByteLength(formValues.password, { min: 8, max: undefined })
-      ) {
-        event.preventDefault();
-        setUpdateError("La contraseña debe contener mínimo 8 caracteres");
-      } else if (
-        validator.isByteLength(formValues.password, { min: 8, max: undefined })
-      ) {
-        setUpdateError(null);
-      }
-    }
-
-    if (formValues.email) {
-      if (!validator.isEmail(formValues.email)) {
-        event.preventDefault();
-        setUpdateEmailError("Introduce un email correcto");
-      } else if (validator.isEmail(formValues.email)) {
-        setUpdateEmailError(null);
-      }
-    }
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
     } else {
+      if (formValues.password) {
+        if (
+          !validator.isByteLength(formValues.password, {
+            min: 8,
+            max: undefined,
+          })
+        ) {
+          event.preventDefault();
+        return  setUpdateError("La contraseña debe contener mínimo 8 caracteres");
+        } else if (
+          validator.isByteLength(formValues.password, {
+            min: 8,
+            max: undefined,
+          })
+        ) {
+          setUpdateError(null);
+        }
+      }
+
+      if (formValues.email) {
+        if (!validator.isEmail(formValues.email)) {
+          event.preventDefault();
+        return  setUpdateEmailError("Introduce un email correcto");
+        } else if (validator.isEmail(formValues.email)) {
+          setUpdateEmailError(null);
+        }
+      }
+
       updateProfile(authState.userToken, formValues);
       if (formValues.nombre) {
         store.dispatch(setUserInfo({ name: formValues.nombre }));
@@ -267,7 +274,6 @@ export default function UserProfile() {
             <Form.Group className="mb-3">
               <Form.Label>Nueva contraseña</Form.Label>
               <Form.Control
-                
                 type="password"
                 placeholder="Cambie su contraseña"
                 name="password"
