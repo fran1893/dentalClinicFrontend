@@ -77,9 +77,6 @@ export default function Login() {
   return (
     <div className="container">
       <div className="abs-center">
-        {/* <pre style={{ textAlign: "left", width: "250px", margin: "auto" }}>
-        {JSON.stringify(formValues, null, 2)}
-      </pre> */}
         <form noValidate onSubmit={handleSubmit} className="form">
           <h1>Inicia Sesión</h1>
           <div className="form-group">

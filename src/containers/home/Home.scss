@@ -1,0 +1,50 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;700&display=swap");
+
+.Home {
+    font-family: "Ubuntu", sans-serif;
+    color: rgb(25, 37, 145);
+    background-color: white;
+    // height: 100vh;
+    .welcome {
+        background-image: url(../../assets/home-header.jpg);
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+
+        .welcomeText {
+            display: flex;
+            flex-direction: column;
+            // font-weight: bold;
+            font-size: 2em;
+            align-items: start;
+            background-color: rgba(255, 255, 255, 0.5);
+            height: 100%;
+        }
+    }
+    .register {
+        background-color: white;
+        .paragraphs {
+
+            margin-top: 1em;
+            width: 50%;
+        }
+        .paragraphsAndButton {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .buttonWelcome {
+            margin-bottom: 1em;
+        }
+    }
+
+    .card {
+        background-color: rgb(255, 255, 255);
+        margin-bottom: 0em !important;
+        border: none;
+        .card-footer{
+            cursor: pointer;
+        }
+    }
+}
