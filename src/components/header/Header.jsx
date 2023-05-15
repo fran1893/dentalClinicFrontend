@@ -21,6 +21,7 @@ export default function Header() {
   const isLoggedIn = authState.isLoggedIn;
   const { name, role } = authState.userInfo;
   const isAdmin = role == "admin";
+  const isDoctor = role == "doctor";
 
   // handlers
   const handleLogout = () => {
@@ -55,11 +56,14 @@ export default function Header() {
                   <NavLink className="nav-link" to="/dates">
                     Citas
                   </NavLink>
-                  <NavLink className="nav-link" to="/create-appointment">
-                    Crear Cita
-                  </NavLink>
                 </>
               )}
+              {!isAdmin && !isDoctor && isLoggedIn && (
+                <NavLink className="nav-link" to="/create-appointment">
+                  Crear Cita
+                </NavLink>
+              )}
+
               {isAdmin && (
                 <>
                   <NavLink className="nav-link" to="/admin">
