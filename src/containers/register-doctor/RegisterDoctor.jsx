@@ -80,7 +80,7 @@ export default function RegisterDoctor() {
   return (
     <div className="container Registerdoctor">
       {!showForm && (
-        <div className="d-flex justify-content-center mt-5">
+        <div className="d-flex justify-content-center mt-5 register-message">
           <h1>Registrado Correctamente!</h1>
           <Button onClick={handleShowForm}>Registrar un nuevo doctor</Button>
         </div>
